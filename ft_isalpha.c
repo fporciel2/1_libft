@@ -29,6 +29,7 @@
 * You can contact the author at: 
 *- fedeporcus@protonmail.com
 *- Via Piantarose 7A 06121 Perugia (PG) Italia (Italy) */
+
 #include "libft.h"
 
 int	ft_isalpha(int c)
