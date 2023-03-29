@@ -9,9 +9,10 @@
 /*   Updated: 2023/01/26 12:31:35 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/* This software is made available to anyone who wants to retrace the 
+/* 
+* This software is made available to anyone who wants to retrace the 
 * author's learning path through the projects of school 42.
-* Copyright (C) 2023  Federico Porciello
+* Copyright (C) 2023  fporciel
 * 
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -27,8 +28,8 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 *
 * You can contact the author at: 
-*- fedeporcus@protonmail.com
-*- Via Piantarose 7A 06121 Perugia (PG) Italia (Italy) */
+*- fporciel@student.42roma.it
+*/
 
 #include "libft.h"
 
