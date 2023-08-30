@@ -6,7 +6,7 @@
 /*   By: fporciel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 09:13:03 by fporciel          #+#    #+#             */
-/*   Updated: 2023/02/07 09:25:52 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:03:57 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -35,14 +35,10 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
+	size_t	strlen;
 
-	if ((s == NULL) || (s[0] == 0))
+	if (s == NULL)
 		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	strlen = ft_strlen(s);
+	write(fd, s, strlen);
 }

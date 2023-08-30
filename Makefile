@@ -6,7 +6,7 @@
 #    By: fporciel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 17:20:25 by fporciel          #+#    #+#              #
-#    Updated: 2023/03/04 10:10:11 by fporciel         ###   ########.fr        #
+#    Updated: 2023/08/30 16:08:49 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -40,26 +40,35 @@ HEADERS := $(wildcard *.h)
 OBJS := $(patsubst %.c,%.o,$(SRCS))
 BONUSOBJS := $(patsubst %.c,%.o,$(BONUSSRCS))
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -c
+CFLAGS := -Wall -Wextra -Werror -O1 -Os -g -fsanitize=address -c
 
 $(NAME): $(OBJS) $(HEADERS)
-	ar rcs $@ $^
+	@if [ ! -e $(NAME) ]; \
+		then ar rcs $@ $^; fi
+	@rm -f $(OBJS)
 
 all: $(NAME)
 
 $(OBJS): $(SRCS) $(HEADERS)
-	$(CC) $(CFLAGS) $^
+	@$(CC) $(CFLAGS) $^
+	@rm -f *h.gch
 
 $(BONUSOBJS): $(BONUSSRCS) $(HEADERS)
-	$(CC) $(CFLAGS) $^
+	@$(CC) $(CFLAGS) $^
+	@rm -f *h.gch
 
-bonus: $(NAME) $(BONUSOBJS)
-	ar rcs $(NAME) $(BONUSOBJS)
+bonus: $(BONUSOBJS)
+	@if [ ! -e $(NAME) ]; \
+		then make; fi
+	@if ! make -q bonus; \
+		then ar rcs $(NAME) $(BONUSOBJS); fi
+	@make clean
 
 clean:
-	rm -f $(OBJS) $(BONUSOBJS)
+	@rm -f $(OBJS) $(BONUSOBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
+

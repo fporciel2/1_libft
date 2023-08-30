@@ -6,7 +6,7 @@
 /*   By: fporciel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:01:03 by fporciel          #+#    #+#             */
-/*   Updated: 2023/02/09 15:21:33 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:30:24 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -36,20 +36,23 @@
 static int	ft_power(int base, int exp)
 {
 	int	power;
+	int	current_power;
 
-	power = base;
 	if ((base == 0) && (exp != 0))
 		return (0);
-	if (exp == 0)
+	else if (exp == 0)
 		return (1);
-	if (exp == 1)
-		return (base);
-	if (exp == 2)
-		return (base * base);
-	while (exp > 1)
+	else
 	{
-		power = power * base;
-		exp--;
+		power = 1;
+		current_power = base;
+		while (exp)
+		{
+			if (exp & 1)
+				power *= current_power;
+			current_power *= current_power;
+			exp >>= 1;
+		}
 	}
 	return (power);
 }

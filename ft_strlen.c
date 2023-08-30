@@ -6,7 +6,7 @@
 /*   By: fporciel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 11:29:25 by fporciel          #+#    #+#             */
-/*   Updated: 2023/01/26 10:43:46 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:25:11 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -30,14 +30,17 @@
 * You can contact the author at: 
 *- fporciel@student.42roma.it
 */
+
 #include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+    const char  *s1 = s;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+    if (s1)
+    {
+        while (*s1)
+            s1++;
+    }
+    return ((size_t)(s1 - s));
 }
