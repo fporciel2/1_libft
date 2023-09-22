@@ -6,7 +6,7 @@
 /*   By: fporciel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:01:27 by fporciel          #+#    #+#             */
-/*   Updated: 2023/09/20 14:27:33 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:56:24 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -32,7 +32,8 @@
 */
 
 #include "libft.h"
-/*static int	ft_isnegative(int n)
+
+static int	ft_isnegative(int n)
 {
 	if (n < 0)
 		return (1);
@@ -99,11 +100,4 @@ char	*ft_itoa(int n)
 		return (NULL);
 	ft_trueitoa(itoa, n2, k, n);
 	return (itoa);
-}*/
-
-char    *ft_itoa(int n)
-{
-    char    *num;
-
-    if (n == -2147483648)
 }
