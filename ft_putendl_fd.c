@@ -6,7 +6,7 @@
 /*   By: fporciel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 09:28:52 by fporciel          #+#    #+#             */
-/*   Updated: 2023/02/07 09:45:36 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:59:06 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -35,15 +35,11 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	size_t	i;
+	ssize_t	val;
 
 	if (s == NULL)
 		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-	write(fd, "\n", 1);
+	val = write(fd, s, ft_strlen(s));
+	val = write(fd, "\n", 1);
+	(void)val;
 }

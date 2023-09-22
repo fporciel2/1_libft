@@ -6,7 +6,7 @@
 /*   By: fporciel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 09:00:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/02/09 15:42:23 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:55:46 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -35,5 +35,8 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	ssize_t	val;
+
+	val = write(fd, &c, 1);
+	(void)val;
 }

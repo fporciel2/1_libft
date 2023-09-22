@@ -6,7 +6,7 @@
 /*   By: fporciel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 09:47:27 by fporciel          #+#    #+#             */
-/*   Updated: 2023/02/07 12:57:10 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:58:02 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -35,18 +35,23 @@
 
 static void	ft_writenbr(char c, int fd)
 {
-	write(fd, &c, 1);
+	ssize_t	val;
+
+	val = write(fd, &c, 1);
+	(void)val;
 }
 
 void	ft_putnbr_fd(int n, int fd)
 {
 	long int	i;
+	ssize_t		val;
 
 	i = n;
 	if (i < 0)
 	{
 		i = -i;
-		write(fd, "-", 1);
+		val = write(fd, "-", 1);
+		(void)val;
 	}
 	if (i > 9)
 	{

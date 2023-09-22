@@ -6,7 +6,7 @@
 #    By: fporciel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 17:20:25 by fporciel          #+#    #+#              #
-#    Updated: 2023/08/30 16:08:49 by fporciel         ###   ########.fr        #
+#    Updated: 2023/09/22 12:55:11 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -40,7 +40,9 @@ HEADERS := $(wildcard *.h)
 OBJS := $(patsubst %.c,%.o,$(SRCS))
 BONUSOBJS := $(patsubst %.c,%.o,$(BONUSSRCS))
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -O1 -Os -g -fsanitize=address -c
+CFLAGS := -Wall -Wextra -Werror -O1 -g -fsanitize=address \
+	-fsanitize=leak -fsanitize=undefined -fsanitize=bounds \
+	-I$(shell pwd) -c
 
 $(NAME): $(OBJS) $(HEADERS)
 	@if [ ! -e $(NAME) ]; \
