@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:05:07 by fporciel          #+#    #+#             */
-/*   Updated: 2023/08/28 14:35:02 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:10:37 by fedeporcus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -31,102 +31,128 @@
 *- fporciel@student.42roma.it
 */
 
-#include "./libft.h"
+//#include "./libft.h"
+#include <stddef.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
 
-static char	**split_free_null(char ***phrase, size_t count)
-{
-	size_t	other_count;
-
-	other_count = 0;
-	while (other_count < count)
-	{
-		if (((*phrase)[other_count]) != NULL)
-		{
-			free(((*phrase)[other_count]));
-			((*phrase)[other_count]) = NULL;
-		}
-		other_count++;
-	}
-	if (((*phrase)[count]) != NULL)
-	{
-		free(((*phrase)[count]));
-		((*phrase)[count]) = NULL;
-	}
-	free(*phrase);
-	(*phrase) = NULL;
-	return (*phrase);
-}
-
-static size_t	split_count(char const *str, char delim, int param, size_t *one)
-{
-	size_t	words;
-	ssize_t	letters;
-
-	words = 0;
-	letters = 0;
-	if (param == 0)
-	{
-		while (str[letters] != 0)
-		{
-			while (str[letters] == delim)
-				letters++;
-			if ((str[letters] != delim) && (str[letters] != 0))
-				words++;
-			while ((str[letters] != delim) && (str[letters] != 0))
-				letters++;
-		}
-		return (words);
-	}
-	while (str[(*one)] == delim)
-		(*one)++;
-	while ((str[(*one)]) && (str[(*one)] != delim) && (letters++ >= 0))
-		(*one)++;
-	return (letters);
-}
-
-static char	*split_copy_word(char *word, char const *str, char del, size_t *one)
-{
-	size_t	letters;
-	size_t	start_word;
-	size_t	count;
-
-	letters = split_count(str, del, 1, one);
-	word = (char *)malloc(sizeof(char) * (letters + 1));
-	if (word == NULL)
-		return (NULL);
-	start_word = ((*one) - letters);
-	count = 0;
-	while (count < letters)
-	{
-		word[count] = str[start_word + count];
-		count++;
-	}
-	word[count] = 0;
-	return (word);
-}
-
-char	**ft_split(char const *str, char delim)
+static size_t	ft_count_words(char *str, char del)
 {
 	size_t	count;
-	size_t	count_words;
-	size_t	start;
-	char	**phrase;
+	size_t	num;
 
 	count = 0;
-	start = 0;
-	if ((str == NULL) || ((*str) == 0))
-		return (NULL);
-	count_words = split_count(str, delim, 0, &start);
-	phrase = (char **)malloc(sizeof(char *) * (count_words + 1));
-	if (phrase == NULL)
-		return (NULL);
-	while (count < count_words)
+	num = 0;
+	while (str[count])
 	{
-		phrase[count] = split_copy_word(phrase[count], str, delim, &start);
-		if (phrase[count] == NULL)
-			return (split_free_null(&phrase, count));
+		if ((str[count] != del)
+			&& ((count == 0) || (str[count - 1] == del)))
+			num++;
+	}
+	return (num);
+}
+
+static char	**ft_clean_split(char **split, size_t words)
+{
+	size_t	count;
+
+	count = 0;
+	if (words == count)
+		return (free(split), NULL);
+	while (count < words)
+	{
+		free(split[count]);
+		split[count] = NULL;
 		count++;
 	}
-	phrase[count] = NULL;
-	return (phrase);
+	free(split);
+	return (NULL);
+}
+
+static char	*ft_create_string(char *split, char *str, char del)
+{
+	size_t	strlen;
+
+	strlen = 0;
+	while (str[strlen] && (str[strlen] != del))
+		strlen++;
+	split = malloc((strlen + 1) * sizeof(*split));
+	if (split == NULL)
+		return (NULL);
+	strlen = 0;
+	while (str[strlen] && (str[strlen] != del))
+	{
+		split[strlen] = str[strlen];
+		strlen++;
+	}
+	split[strlen] = 0;
+	return (split);
+}
+
+static char	**ft_fill_split(char **split, char *str, char del)
+{
+	size_t	count;
+	ssize_t	words;
+
+	count = 0;
+	words = -1;
+	while (str[count])
+	{
+		if ((str[count] != del)
+			&& ((count == 0) || (str[count - 1] == del)))
+		{
+			words++;
+			split[words] = NULL;
+			split[words] = ft_create_string(split[words], &(str[count]), del);
+			if (split[words] == NULL)
+				return (ft_clean_split(split, words));
+		}
+		count++;
+	}
+	return (split);
+}
+
+char	**ft_split(char *str, char del)
+{
+	size_t	words_num;
+	char	**split;
+
+	if (str == NULL)
+		return (NULL);
+	words_num = ft_count_words(str, del);
+	split = malloc((words_num + 1) * sizeof(*split));
+	if (split == NULL)
+		return (NULL);
+	split = ft_fill_split(split, str, del);
+	if (split == NULL)
+		return (NULL);
+	split[words_num] = NULL;
+	return (split);
+}
+
+int	main(int argc, char **argv)
+{
+	char	**arg_a;
+	char	**arg_b;
+	size_t	count;
+
+	write(1, argv[1], ft_strlen(argv[1]));
+	write(1, "\n", 1);
+	write(1, argv[2], ft_strlen(argv[2]));
+	write(1, "\n\n", 2);
+	arg_a = ft_split(argv[1], 32);
+	if (arg_a == NULL)
+		return ((int)write(1, "Failed split\n", 13));
+	arg_b = ft_split(argv[2], 32);
+	if (arg_b == NULL)
+		return ((int)write(1, "Failed split\n", 13));
+	count = 0;
+	while (arg_a[count])
+	{
+		printf("%s\n", arg_a[count]);
+		count++;
+	}
+	return (argc);
 }
