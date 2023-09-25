@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:05:07 by fporciel          #+#    #+#             */
-/*   Updated: 2023/09/24 20:10:37 by fedeporcus       ###   ########.fr       */
+/*   Updated: 2023/09/25 06:24:13 by fedeporcus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -31,12 +31,25 @@
 *- fporciel@student.42roma.it
 */
 
-//#include "./libft.h"
-#include <stddef.h>
+#include "./libft.h"
+/*#include <stddef.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
+
+size_t	ft_strlen(char *str)
+{
+	size_t	strlen;
+
+	strlen = 0;
+	if (str)
+	{
+		while (str[strlen])
+			strlen++;
+	}
+	return (strlen);
+}*/
 
 static size_t	ft_count_words(char *str, char del)
 {
@@ -50,6 +63,7 @@ static size_t	ft_count_words(char *str, char del)
 		if ((str[count] != del)
 			&& ((count == 0) || (str[count - 1] == del)))
 			num++;
+		count++;
 	}
 	return (num);
 }
@@ -131,12 +145,13 @@ char	**ft_split(char *str, char del)
 	split[words_num] = NULL;
 	return (split);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	char	**arg_a;
 	char	**arg_b;
 	size_t	count;
+	size_t	splitlen;
 
 	write(1, argv[1], ft_strlen(argv[1]));
 	write(1, "\n", 1);
@@ -154,5 +169,29 @@ int	main(int argc, char **argv)
 		printf("%s\n", arg_a[count]);
 		count++;
 	}
+	splitlen = 0;
+	while (splitlen < count)
+	{
+		free(arg_a[splitlen]);
+		arg_a[splitlen] = NULL;
+		splitlen++;
+	}
+	free(arg_a);
+	arg_a = NULL;
+	count = 0;
+	while (arg_b[count])
+	{
+		printf("%s\n", arg_b[count]);
+		count++;
+	}
+	splitlen = 0;
+	while (splitlen < count)
+	{
+		free(arg_b[splitlen]);
+		arg_b[splitlen] = NULL;
+		splitlen++;
+	}
+	free(arg_b);
+	arg_b = NULL;
 	return (argc);
-}
+}*/
