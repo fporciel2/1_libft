@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:05:07 by fporciel          #+#    #+#             */
-/*   Updated: 2023/09/28 20:25:16 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:27:49 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -51,7 +51,7 @@ size_t	ft_strlen(char *str)
 	return (strlen);
 }*/
 
-static size_t	ft_count_words(char *str, char del)
+static size_t	ft_count_words(const char *str, char del)
 {
 	size_t	count;
 	size_t	num;
@@ -85,7 +85,7 @@ static char	**ft_clean_split(char **split, size_t words)
 	return (NULL);
 }
 
-static char	*ft_create_string(char *split, char *str, char del)
+static char	*ft_create_string(char *split, const char *str, char del)
 {
 	size_t	strlen;
 
@@ -105,7 +105,7 @@ static char	*ft_create_string(char *split, char *str, char del)
 	return (split);
 }
 
-static char	**ft_fill_split(char **split, char *str, char del)
+static char	**ft_fill_split(char **split, const char *str, char del)
 {
 	size_t	count;
 	ssize_t	words;
