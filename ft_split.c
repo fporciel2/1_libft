@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:05:07 by fporciel          #+#    #+#             */
-/*   Updated: 2023/09/25 06:24:13 by fedeporcus       ###   ########.fr       */
+/*   Updated: 2023/09/28 20:25:16 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -128,7 +128,7 @@ static char	**ft_fill_split(char **split, char *str, char del)
 	return (split);
 }
 
-char	**ft_split(char *str, char del)
+char	**ft_split(const char *str, char del)
 {
 	size_t	words_num;
 	char	**split;
