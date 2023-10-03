@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 10:03:22 by fporciel          #+#    #+#             */
-/*   Updated: 2023/10/03 10:19:51 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/10/03 11:09:59 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -63,8 +63,9 @@ static long long	ft_chkatol(char *nptr)
 	i = 0;
 	while (!ft_isdigit(nptr[i]) && (nptr[i] != 0))
 	{
-		if ((!((nptr[i] == 43) || (nptr[i] == 45)) && (nptr[i] != 32))
-			|| ((nptr[i] >= 9) && (nptr[i] <= 13)))
+		if (!((nptr[i] == 43) || (nptr[i] == 45))
+			&& !((nptr[i] == 32)
+				|| ((nptr[i] >= 9) && (nptr[i] <= 13))))
 			return (0);
 		if ((nptr[i] == 45) && (ft_isdigit(nptr[i + 1])))
 			return (-1);
