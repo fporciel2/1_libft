@@ -63,7 +63,7 @@ static long long	ft_chkatol(char *nptr)
 	i = 0;
 	while (!ft_isdigit(nptr[i]) && (nptr[i] != 0))
 	{
-		if (!((nptr[i] == 43) || (nptr[i] == 45)) && !(nptr[i] == 32)
+		if ((!((nptr[i] == 43) || (nptr[i] == 45)) && (nptr[i] != 32))
 			|| ((nptr[i] >= 9) && (nptr[i] <= 13)))
 			return (0);
 		if ((nptr[i] == 45) && (ft_isdigit(nptr[i + 1])))
