@@ -6,7 +6,7 @@
 #    By: fporciel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 17:20:25 by fporciel          #+#    #+#              #
-#    Updated: 2023/09/28 20:57:12 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/19 13:12:38 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -34,7 +34,7 @@
 .PHONY: all clean fclean re bonus
 .DEFAULT_GOAL := $(NAME)
 NAME := libft.a
-SRCS := $(filter-out ft_lst%.c, $(wildcard ft_*.c))
+SRCS := $(filter-out ft_lst%.c, $(wildcard ft_*.c) get_next_line.c)
 BONUSSRCS := $(wildcard ft_lst*.c)
 HEADERS := $(wildcard *.h)
 OBJS := $(patsubst %.c,%.o,$(SRCS))
