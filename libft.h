@@ -6,7 +6,7 @@
 /*   By: fporciel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:07:22 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/19 13:15:22 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:05:43 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* 
@@ -39,7 +39,7 @@
 # include <stdint.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 100000
 # endif
 
 typedef struct s_list
